@@ -1,0 +1,70 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Custom for Unity
+*.cs diff=csharp text
+*.cginc text
+*.shader text
+
+# Unity YAML merge strategy
+*.unity merge=unityyamlmerge eol=lf
+*.prefab merge=unityyamlmerge eol=lf
+*.asset merge=unityyamlmerge eol=lf
+*.mat merge=unityyamlmerge eol=lf
+*.anim merge=unityyamlmerge eol=lf
+*.controller merge=unityyamlmerge eol=lf
+*.physicMaterial merge=unityyamlmerge eol=lf
+*.physicsMaterial2D merge=unityyamlmerge eol=lf
+*.mask merge=unityyamlmerge eol=lf
+*.overlay merge=unityyamlmerge eol=lf
+*.spriteatlas merge=unityyamlmerge eol=lf
+
+# Image files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tga binary
+*.gif binary
+*.psd binary
+*.bmp binary
+*.iff binary
+*.pict binary
+
+# Audio files
+*.wav binary
+*.mp3 binary
+*.ogg binary
+*.aif binary
+*.aiff binary
+*.mod binary
+*.it binary
+*.s3m binary
+*.xm binary
+
+# Video files
+*.mov binary
+*.mpg binary
+*.mpeg binary
+*.mp4 binary
+*.avi binary
+*.asf binary
+*.flv binary
+*.mkv binary
+
+# 3D objects
+*.fbx binary
+*.obj binary
+*.3ds binary
+*.dxf binary
+*.dae binary
+
+# Fonts
+*.ttf binary
+*.otf binary
+
+# Archives
+*.zip binary
+*.tar binary
+*.rar binary
+*.gz binary
+*.bz2

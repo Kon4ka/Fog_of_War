@@ -1,0 +1,66 @@
+# This .gitignore file should be placed at the root of your Unity project directory
+
+# Основные папки
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+
+# Файлы, которые могут быть слишком большими или содержать конфиденциальные данные
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# Автогенерируемые файлы JetBrains Rider
+[Aa]ssets/Plugins/Editor/JetBrains*
+
+# Кэш Visual Studio
+.vs/
+
+# Кэш Gradle
+.gradle/
+
+
+# Автогенерируемые файлы VS/MD/Consulo
+ExportedObj/
+.consulo/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Файлы Unity3D meta
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Файлы отчетов о сбоях Unity3D
+sysinfo.txt
+
+# Сборки
+*.apk
+*.aab
+*.unitypackage
+*.app
+
+# Crashlytics
+crashlytics-build.properties
+
+# Packed Addressables
+[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+
+# Временные автогенерируемые Android Assets
+[Aa]ssets/[Ss]treamingAssets/aa.meta
+[Aa]ssets/[Ss]treamingAssets/aa/*
