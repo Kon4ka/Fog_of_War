@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 34e1452e07a0b40c295c5b10aa679465
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 33935
+  packageName: Green Dungeon
+  packageVersion: 1.5
+  assetPath: Assets/donjon/Standard Assets/Water (Pro Only)/Water4/Sources/Shaders/WaterInclude.cginc
+  uploadId: 66170

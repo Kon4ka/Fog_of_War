@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4185bc77c7194462ca3b1097ef4a5de0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 33935
+  packageName: Green Dungeon
+  packageVersion: 1.5
+  assetPath: Assets/donjon/Standard Assets/Water (Pro Only)/Water4/Sources/Scripts/PlanarReflection.cs
+  uploadId: 66170

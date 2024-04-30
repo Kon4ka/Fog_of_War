@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 358a87f082de94ddd810e929c00c8594
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 33935
+  packageName: Green Dungeon
+  packageVersion: 1.5
+  assetPath: Assets/donjon/Standard Assets/Water (Pro Only)/Sources/Objects/Materials/water
+    plane-lambert1.mat
+  uploadId: 66170

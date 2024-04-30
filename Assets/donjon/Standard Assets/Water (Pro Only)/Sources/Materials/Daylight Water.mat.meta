@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ae162c0523ab4468bb03ef160eb672e2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 33935
+  packageName: Green Dungeon
+  packageVersion: 1.5
+  assetPath: Assets/donjon/Standard Assets/Water (Pro Only)/Sources/Materials/Daylight
+    Water.mat
+  uploadId: 66170
