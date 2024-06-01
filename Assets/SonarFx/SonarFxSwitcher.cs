@@ -60,8 +60,8 @@ public class SonarFxSwitcher : MonoBehaviour
 
         if (parameter > 0.0f)
         {
-            fx.baseColor = baseAlbedo.Evaluate(parameter);
-            fx.addColor = baseEmission.Evaluate(parameter);
+            // fx.baseColor = baseAlbedo.Evaluate(parameter);
+            // fx.addColor = baseEmission.Evaluate(parameter);
             fx.waveColor = waveColor.Evaluate(parameter);
         }
     }
