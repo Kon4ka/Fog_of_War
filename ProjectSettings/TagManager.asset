@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Crystal
   - Rune
+  - Portal
   layers:
   - Default
   - TransparentFX
