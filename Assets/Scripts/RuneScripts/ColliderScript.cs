@@ -31,23 +31,12 @@ public class ColliderScript : MonoBehaviour
     }
 
     //private void OnTriggerExit(Collider other)
-    //{   
-    //    if (other.gameObject.CompareTag("Crystal"))
+    //{
+    //    if (other.gameObject.CompareTag("crystal"))
     //    {
     //        StopCoroutine(crystalMoving);
-    //        isActivate = !isActivate;
-    //        Debug.Log("Шарик вне зоны руны");
-    //        if (other.gameObject.TryGetComponent<Rigidbody>(out var rb))
-    //        {
-    //            rb.isKinematic = false;
-    //        }
-            
-    //        if (rune.gameObject.TryGetComponent<Renderer>(out var runeRenderer))
-    //        {
-    //            runeRenderer.material = isActivate ? activateMaterial : unActivateMaterial;
-    //        }
     //    }
-        
+
     //}
 
     private IEnumerator MoveCrystal(GameObject crystal)

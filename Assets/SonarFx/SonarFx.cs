@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Camera))]
 public class SonarFx : MonoBehaviour
 {
-    public GameObject camera;
     // Sonar mode (directional or spherical)
     public enum SonarMode { Directional, Spherical }
     [SerializeField] SonarMode _mode = SonarMode.Spherical; // Default to Spherical
@@ -64,25 +65,40 @@ public class SonarFx : MonoBehaviour
         addColorID = Shader.PropertyToID("_SonarAddColor");
     }
 
-    void Update()
+
+    [SerializeField] private InputActionReference gripAction;
+ 
+
+    private float _gripValue;
+
+
+    private void Start()
     {
-        if (Input.GetMouseButtonDown(0)) // Left Mouse Button
-        {
-            // Деактивируем сонар при нажатии левой кнопки мыши
-            sonarActive = false;
-        }
-        else if (Input.GetMouseButtonDown(1)) // Right Mouse Button
-        {
-            // Активируем сонар при нажатии правой кнопки мыши
-            GetComponent<Camera>().SetReplacementShader(shader, null);
-            sonarActive = true;
+        gripAction.action.performed += GetGripData;
+    }
 
-        }
-
-        // Обновляем состояние сонара, только если он активен
+    private void GetGripData(InputAction.CallbackContext context)
+    {
+        Debug.Log("Было в нажатии");
+        sonarActive = !sonarActive;
         if (sonarActive)
         {
-            Vector3 playerPosition = transform.position; // Assuming the script is attached to the player
+            GetComponent<Camera>().SetReplacementShader(shader, null);
+        }
+        else
+        {
+            GetComponent<Camera>().ResetReplacementShader();
+        }
+    }
+
+
+
+    void Update()
+    {
+        if (sonarActive)
+        {
+            Debug.Log("Было в апдейте");
+            Vector3 playerPosition = transform.position;
             Shader.SetGlobalVector(waveVectorID, playerPosition);
             Shader.SetGlobalColor(baseColorID, _baseColor);
             Shader.SetGlobalColor(waveColorID, _waveColor);
@@ -90,20 +106,19 @@ public class SonarFx : MonoBehaviour
 
             var param = new Vector4(_waveAmplitude, _waveExponent, _waveInterval, _waveSpeed);
             Shader.SetGlobalVector(waveParamsID, param);
-
-            // Включаем шейдер для сонара
             Shader.EnableKeyword("SONAR_SPHERICAL");
         }
         else
         {
-            // Сбрасываем параметры и отключаем шейдер, если сонар не активен
-            GetComponent<Camera>().ResetReplacementShader();
             Shader.SetGlobalColor(baseColorID, Color.black);
             Shader.SetGlobalColor(waveColorID, Color.black);
             Shader.SetGlobalColor(addColorID, Color.black);
             Shader.DisableKeyword("SONAR_SPHERICAL");
         }
     }
-
+    private void OnDestroy()
+    {
+        gripAction.action.performed -= GetGripData;
+    }
 }
 
