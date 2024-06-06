@@ -1,9 +1,21 @@
 fileFormatVersion: 2
 guid: a59f6548c14dfa84ba2ca07e21ce1543
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259641
+  packageName: Simple Modular Dungeon
+  packageVersion: 1.01
+  assetPath: Assets/Simple Modular Dungeon/Components/Mesh Containers/ModularDungeonSeperatedMaterials.fbx
+  uploadId: 621041
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fire (Fire Chalice Variation 001)
+    second: {fileID: 2100000, guid: 36e1774b3993b11469a42d59695eb0bd, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -88,7 +100,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.01
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
@@ -105,10 +117,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 259641
-  packageName: Simple Modular Dungeon
-  packageVersion: 1.01
-  assetPath: Assets/Simple Modular Dungeon/Components/Mesh Containers/ModularDungeonSeperatedMaterials.fbx
-  uploadId: 621041
