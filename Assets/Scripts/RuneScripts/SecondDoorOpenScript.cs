@@ -1,34 +1,22 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class ColliderScript : MonoBehaviour
+public class SecondDoorOpenScript : MonoBehaviour
 {
     [SerializeField] private GameObject rune;
-    
+    [SerializeField] private ColliderScript previousRune;
     [SerializeField] private Material activateMaterial;
     [SerializeField] private Material unActivateMaterial;
-    [SerializeField] private TextMeshPro timerText;
-    [SerializeField] private float timerDuration;
+    [SerializeField] private TextMeshPro supportText;
     [SerializeField] private GameObject door;
-    [SerializeField] private GameObject secondCrystal;
 
     private Quaternion originalDoorRotation;
-
     private bool isDoorOpen = false;
     private bool isRuneActivate = false;
 
-    public bool IsRuneActivate
-    {
-        get { return isRuneActivate; }
-    }
-
-    private Coroutine crystalMoving;
     private Coroutine rotateDoorCoroutine;
-    private Coroutine timerCoroutine;
 
     private void Awake()
     {
@@ -37,7 +25,7 @@ public class ColliderScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isRuneActivate || !other.gameObject.CompareTag("Crystal")) 
+        if (isRuneActivate || !other.gameObject.CompareTag("Crystal"))
         {
             return;
         }
@@ -53,25 +41,56 @@ public class ColliderScript : MonoBehaviour
         {
             grabInteractable.enabled = false;
         }
-        crystalMoving = StartCoroutine(MoveCrystal(other.gameObject));
+        StartCoroutine(MoveCrystal(other.gameObject));
+    }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (previousRune.IsRuneActivate)
+        {
+            if (supportText.enabled)
+            {
+                supportText.enabled = false;
+            }
+            if (!isDoorOpen)
+            {
+                isDoorOpen = true;
+                ToggleDoor();
+            }
 
+        }
+        else
+        {
+            if (!supportText.enabled)
+            {
+                supportText.enabled = true;
+            }
+            if (isDoorOpen)
+            {
+                isDoorOpen = false;
+                ToggleDoor();
+            }
+            supportText.text = "Первая руна должна быть активирована!";
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Вышло" + isRuneActivate.ToString());
+        Debug.Log("Вышло");
 
         if (!isRuneActivate || !other.gameObject.CompareTag("Crystal"))
         {
             return;
         }
+        supportText.enabled = false;
         other.isTrigger = false;
         isRuneActivate = !isRuneActivate;
         ChangeRuneMaterial();
-        StopCoroutine(crystalMoving);
-        ToggleDoor();
-        StopTimer();
+        if (isDoorOpen)
+        {
+            isDoorOpen = false;
+            ToggleDoor();
+        }
     }
 
     private void ChangeRuneMaterial()
@@ -84,7 +103,6 @@ public class ColliderScript : MonoBehaviour
 
     private void ToggleDoor()
     {
-        isDoorOpen = !isDoorOpen;
         if (rotateDoorCoroutine != null)
         {
             StopCoroutine(rotateDoorCoroutine);
@@ -109,64 +127,15 @@ public class ColliderScript : MonoBehaviour
         {
             grabInteractable.enabled = true;
         }
+        Debug.Log("Корутина завершена");
         ChangeRuneMaterial();
-        ToggleDoor();
-        timerCoroutine = StartCoroutine(StartTimer());
-        
     }
-
-    private void StopTimer()
-    {
-        timerText.enabled = false;
-        if (timerCoroutine != null)
-        {
-            StopCoroutine(timerCoroutine);
-            timerCoroutine = null;
-        }
-    }
-
-    private IEnumerator StartTimer()
-    {
-        float timeLeft = timerDuration;
-        timerText.enabled = true;
-        Camera main_camera = Camera.main;
-        bool isEndMessageShowed = false;
-        while (timeLeft > 0)
-        {
-            Debug.Log(main_camera.transform.position.ToString() + secondCrystal.transform.position.ToString() + door.transform.position.ToString());
-            if (main_camera.transform.position.x < door.transform.position.x &&
-                main_camera.transform.position.z < door.transform.position.z &&
-                secondCrystal.transform.position.x < door.transform.position.x &&
-                secondCrystal.transform.position.z < door.transform.position.z &&
-                !isEndMessageShowed)
-            {
-                isEndMessageShowed = !isEndMessageShowed;
-                timerText.text = "Вы успели!";
-                ToggleDoor();
-                yield return new WaitForSeconds(3);
-            }
-            else if (isEndMessageShowed)
-            {
-                timerText.enabled = false;
-                yield break;
-            }
-            timeLeft -= Time.deltaTime;
-            string seconds = timeLeft.ToString("00");
-            timerText.text = seconds;
-            yield return null;
-        }
-        timerText.text = "Вы не успели";
-        ToggleDoor();
-    }
-
-
 
     private IEnumerator RotateDoor()
     {
         Quaternion targetRotation = isDoorOpen ? originalDoorRotation * Quaternion.Euler(0, -90, 0) : originalDoorRotation;
         float duration = 3f;
         float elapsedTime = 0f;
-
         while (elapsedTime < duration)
         {
             door.transform.rotation = Quaternion.Lerp(door.transform.rotation, targetRotation, elapsedTime / duration);

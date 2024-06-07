@@ -54,7 +54,6 @@ public class SonarFx : MonoBehaviour
     int addColorID;
 
     private bool sonarActive = false;
-    private float sonarStartTime;
 
     void Awake()
     {
@@ -67,9 +66,7 @@ public class SonarFx : MonoBehaviour
 
 
     [SerializeField] private InputActionReference gripAction;
- 
 
-    private float _gripValue;
 
 
     private void Start()
@@ -79,7 +76,6 @@ public class SonarFx : MonoBehaviour
 
     private void GetGripData(InputAction.CallbackContext context)
     {
-        Debug.Log("Было в нажатии");
         sonarActive = !sonarActive;
         if (sonarActive)
         {
@@ -97,7 +93,6 @@ public class SonarFx : MonoBehaviour
     {
         if (sonarActive)
         {
-            Debug.Log("Было в апдейте");
             Vector3 playerPosition = transform.position;
             Shader.SetGlobalVector(waveVectorID, playerPosition);
             Shader.SetGlobalColor(baseColorID, _baseColor);
