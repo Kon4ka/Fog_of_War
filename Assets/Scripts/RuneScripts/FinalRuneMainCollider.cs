@@ -76,6 +76,8 @@ public class FinalRuneMainCollider : MonoBehaviour
         {
             case "WhiteCrystal":
                 Debug.Log("Win");
+                //StartCoroutine(SendOutPortal());
+                TurnOnPortal();
                 break;
             case "RedCrystal":
                 StartCoroutine(SendOutThorns());
@@ -86,6 +88,24 @@ public class FinalRuneMainCollider : MonoBehaviour
             default:
                 // Код для всех остальных случаев
                 break;
+        }
+    }
+    private void TurnOnPortal()
+    {
+        portal.gameObject.SetActive(true);
+    }
+
+    private IEnumerator SendOutPortal()
+    {
+        Vector3 originalPosition = portal.transform.position;
+        Vector3 targetPosition = portal.transform.position + new Vector3(0, 0, 2.73f);
+        float duration = 0.5f;
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            portal.transform.position = Vector3.Lerp(originalPosition, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
     }
 
