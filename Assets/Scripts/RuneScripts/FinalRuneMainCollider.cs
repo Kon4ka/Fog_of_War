@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class FinalRuneMainCollider : MonoBehaviour
@@ -9,6 +10,7 @@ public class FinalRuneMainCollider : MonoBehaviour
     [SerializeField] private List<FinalRuneColliders> listOfSubColliders;
     [SerializeField] private GameObject portal;
     [SerializeField] private GameObject thorns;
+    [SerializeField] private GameObject loseScreen;
     [SerializeField] private GameObject leftController;
     [SerializeField] private GameObject rightContoller;
 
@@ -67,10 +69,10 @@ public class FinalRuneMainCollider : MonoBehaviour
                 break;
             }
         }
-        EndOfTheGame();
+        EndOfTheGame(crystal.tag);
     }
 
-    private void EndOfTheGame()
+    private void EndOfTheGame(string tag)
     {
         switch (crystal.tag)
         {
@@ -95,19 +97,6 @@ public class FinalRuneMainCollider : MonoBehaviour
         portal.gameObject.SetActive(true);
     }
 
-    private IEnumerator SendOutPortal()
-    {
-        Vector3 originalPosition = portal.transform.position;
-        Vector3 targetPosition = portal.transform.position + new Vector3(0, 0, 2.73f);
-        float duration = 0.5f;
-        float elapsedTime = 0f;
-        while (elapsedTime < duration)
-        {
-            portal.transform.position = Vector3.Lerp(originalPosition, targetPosition, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-    }
 
     private IEnumerator SendOutThorns()
     {
@@ -123,5 +112,8 @@ public class FinalRuneMainCollider : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        loseScreen.SetActive(true);
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

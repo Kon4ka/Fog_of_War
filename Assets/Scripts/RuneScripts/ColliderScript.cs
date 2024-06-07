@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ColliderScript : MonoBehaviour
@@ -157,6 +158,8 @@ public class ColliderScript : MonoBehaviour
         }
         timerText.text = "Вы не успели";
         ToggleDoor();
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 

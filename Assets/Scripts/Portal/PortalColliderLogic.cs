@@ -5,6 +5,13 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class PortalColliderLogic : MonoBehaviour
 {
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject winnerRoom;
+    private CharacterController characterController;
+    private void Awake()
+    {
+        characterController = player.GetComponent<CharacterController>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Player"))
@@ -12,14 +19,9 @@ public class PortalColliderLogic : MonoBehaviour
             return;
         }
         Debug.Log("Было");
-        //other.isTrigger = true;
-        //if (other.gameObject.TryGetComponent<Rigidbody>(out var rb))
-        //{
-        //    rb.isKinematic = true;
-        //}
-        //if (other.gameObject.TryGetComponent<XRGrabInteractable>(out var grabInteractable))
-        //{
-        //    grabInteractable.enabled = false;
-        //}
+        // Перемещение игрока в позицию комнаты-победителя
+        characterController.enabled = false; // Отключаем CharacterController перед перемещением
+        player.transform.position = winnerRoom.transform.position;
+        characterController.enabled = true; // Включаем CharacterController обратно
     }
 }
