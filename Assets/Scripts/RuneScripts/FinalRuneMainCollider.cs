@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,7 +75,7 @@ public class FinalRuneMainCollider : MonoBehaviour
 
     private void EndOfTheGame(string tag)
     {
-        switch (crystal.tag)
+        switch(tag)
         {
             case "WhiteCrystal":
                 Debug.Log("Win");
@@ -85,7 +86,11 @@ public class FinalRuneMainCollider : MonoBehaviour
                 StartCoroutine(SendOutThorns());
                 break;
             case "PurpleCrystal":
+                System.Random random = new System.Random();
+                string[] tags = { "WhiteCrystal", "RedCrystal" };
                 Debug.Log("50/50");
+                tag = tags[random.Next(tags.Length)];
+                EndOfTheGame(tag);
                 break;
             default:
                 // Код для всех остальных случаев

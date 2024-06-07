@@ -1,6 +1,8 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(Camera))]
 public class SonarFx : MonoBehaviour
@@ -67,8 +69,6 @@ public class SonarFx : MonoBehaviour
 
     [SerializeField] private InputActionReference gripAction;
 
-
-
     private void Start()
     {
         gripAction.action.performed += GetGripData;
@@ -79,12 +79,13 @@ public class SonarFx : MonoBehaviour
         sonarActive = !sonarActive;
         if (sonarActive)
         {
-            GetComponent<Camera>().SetReplacementShader(shader, null);
+            Camera.main.SetReplacementShader(shader, null);
         }
         else
         {
-            GetComponent<Camera>().ResetReplacementShader();
+            Camera.main.ResetReplacementShader();
         }
+
     }
 
 

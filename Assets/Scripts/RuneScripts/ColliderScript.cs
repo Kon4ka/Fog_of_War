@@ -42,8 +42,6 @@ public class ColliderScript : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Вошло");
-        Debug.Log(isRuneActivate.ToString());
         isRuneActivate = !isRuneActivate;
         other.isTrigger = true;
         if (other.gameObject.TryGetComponent<Rigidbody>(out var rb))
@@ -61,7 +59,6 @@ public class ColliderScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Вышло" + isRuneActivate.ToString());
 
         if (!isRuneActivate || !other.gameObject.CompareTag("Crystal"))
         {
@@ -134,7 +131,6 @@ public class ColliderScript : MonoBehaviour
         bool isEndMessageShowed = false;
         while (timeLeft > 0)
         {
-            Debug.Log(main_camera.transform.position.ToString() + secondCrystal.transform.position.ToString() + door.transform.position.ToString());
             if (main_camera.transform.position.x < door.transform.position.x &&
                 main_camera.transform.position.z < door.transform.position.z &&
                 secondCrystal.transform.position.x < door.transform.position.x &&
@@ -156,10 +152,24 @@ public class ColliderScript : MonoBehaviour
             timerText.text = seconds;
             yield return null;
         }
-        timerText.text = "Вы не успели";
+        timerText.text = "00";
         ToggleDoor();
-        yield return new WaitForSeconds(5);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        yield return new WaitForSeconds(1);
+        if (main_camera.transform.position.x < door.transform.position.x &&
+                        main_camera.transform.position.z < door.transform.position.z &&
+                        secondCrystal.transform.position.x < door.transform.position.x &&
+                        secondCrystal.transform.position.z < door.transform.position.z)
+        {
+            timerText.text = "Вы успели!";
+            yield return new WaitForSeconds(3);
+        }
+        else
+        {
+            timerText.text = "Вы не успели";
+            yield return new WaitForSeconds(3);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        timerText.enabled = false;
     }
 
 

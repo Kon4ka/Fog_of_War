@@ -7,7 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class FinalRuneColliders : MonoBehaviour
 {
 
-    private bool isSubRuneActivate = true;
+    private bool isSubRuneActivate = false;
     public bool IsSubRuneActivate
     {
         get { return isSubRuneActivate; }
@@ -20,7 +20,7 @@ public class FinalRuneColliders : MonoBehaviour
             return;
         }
         Debug.Log("Вошло");
-        isSubRuneActivate = !isSubRuneActivate;
+        isSubRuneActivate = true;
         other.isTrigger = true;
         if (other.gameObject.TryGetComponent<Rigidbody>(out var rb))
         {
@@ -41,7 +41,7 @@ public class FinalRuneColliders : MonoBehaviour
         {
             return;
         }
-        isSubRuneActivate = true;
+        isSubRuneActivate = false;
     }
 
 
