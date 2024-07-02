@@ -21,10 +21,10 @@ public class FinalRuneColliders : MonoBehaviour
         }
         Debug.Log("Вошло");
         isSubRuneActivate = true;
-        other.isTrigger = true;
         if (other.gameObject.TryGetComponent<Rigidbody>(out var rb))
         {
             rb.isKinematic = true;
+            rb.useGravity = false;
         }
         if (other.gameObject.TryGetComponent<XRGrabInteractable>(out var grabInteractable))
         {
@@ -61,6 +61,10 @@ public class FinalRuneColliders : MonoBehaviour
         if (crystal.TryGetComponent<XRGrabInteractable>(out var grabInteractable))
         {
             grabInteractable.enabled = true;
+        }
+        if (crystal.TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.useGravity = false;
         }
     }
 }

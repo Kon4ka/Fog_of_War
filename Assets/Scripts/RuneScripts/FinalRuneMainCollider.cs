@@ -14,18 +14,25 @@ public class FinalRuneMainCollider : MonoBehaviour
     [SerializeField] private GameObject loseScreen;
     [SerializeField] private GameObject leftController;
     [SerializeField] private GameObject rightContoller;
+    private bool isActive = false;
 
     private GameObject crystal;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("WhiteCrystal") &
+        if (isActive)
+        {
+            return;
+        }
+        if (
+            !other.gameObject.CompareTag("WhiteCrystal") &
             !other.gameObject.CompareTag("RedCrystal") &
             !other.gameObject.CompareTag("PurpleCrystal")
             )
         {
             return;
         }
+        isActive = true;
         other.isTrigger = true;
         if (other.gameObject.TryGetComponent<Rigidbody>(out var rb))
         {
